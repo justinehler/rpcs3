@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "save_data_utility.h"
 
 //Cause i can not decide what struct to be used to fill those. Just use no real data now.
@@ -48,7 +48,7 @@ void save_data_info_dialog::UpdateData()
 	m_list->setItem(0, 0, new QTableWidgetItem(tr("User ID")));
 	m_list->setItem(0, 1, new QTableWidgetItem("00000000 (None)"));
 
-	m_list->setItem(1, 0, new QTableWidgetItem(tr("Game Title")));
+	m_list->setItem(1, 0, new QTableWidgetItem(tr("Game title")));
 	m_list->setItem(1, 1, new QTableWidgetItem("Happy with rpcs3 (free)"));
 
 	m_list->setItem(2, 0, new QTableWidgetItem(tr("Subtitle")));
@@ -60,7 +60,7 @@ void save_data_info_dialog::UpdateData()
 	m_list->setItem(4, 0, new QTableWidgetItem(tr("Copyable")));
 	m_list->setItem(4, 1, new QTableWidgetItem("1 (Not allowed)"));
 
-	m_list->setItem(5, 0, new QTableWidgetItem(tr("Play Time")));
+	m_list->setItem(5, 0, new QTableWidgetItem(tr("Play time")));
 	m_list->setItem(5, 1, new QTableWidgetItem("00:00:00"));
 	//Maybe there should be more details of save data.
 	//But i'm getting bored for assign it one by one.
@@ -82,15 +82,15 @@ save_data_manage_dialog::save_data_manage_dialog(QWidget* parent, unsigned int* 
 	m_sort_options->setEditable(false);
 	//You might change this - of corse we should know what to been set - maybe after functions related been implemented.
 	m_sort_options->addItem(tr("User Id"));
-	m_sort_options->addItem(tr("Game Title"));
-	m_sort_options->addItem(tr("Game Subtitle"));
-	m_sort_options->addItem(tr("Play Time"));
-	m_sort_options->addItem(tr("Data Size"));
-	m_sort_options->addItem(tr("Last Modified"));
-	m_sort_options->addItem(tr("Created Time"));
-	m_sort_options->addItem(tr("Accessed Time"));
-	m_sort_options->addItem(tr("Modified Time"));
-	m_sort_options->addItem(tr("Modify Time"));
+	m_sort_options->addItem(tr("Game title"));
+	m_sort_options->addItem(tr("Game subtitle"));
+	m_sort_options->addItem(tr("Play time"));
+	m_sort_options->addItem(tr("Data size"));
+	m_sort_options->addItem(tr("Last modified"));
+	m_sort_options->addItem(tr("Created time"));
+	m_sort_options->addItem(tr("Accessed time"));
+	m_sort_options->addItem(tr("Modified time"));
+	m_sort_options->addItem(tr("Modify time"));
 
 	m_sort_type = sort_type;
 	if (m_sort_type != nullptr)
@@ -172,7 +172,7 @@ void save_data_manage_dialog::OnApplySort()
 save_data_list_dialog::save_data_list_dialog(QWidget* parent, bool enable_manage)
 	: QDialog(parent)
 {
-	setWindowTitle(tr("Save Data Utility"));
+	setWindowTitle(tr("Save data utility"));
 	setMinimumSize(QSize(400, 400));
 
 	QLabel* l_description = new QLabel(tr("This is only a stub for now. This doesn't work yet due to related functions not being implemented."), this);

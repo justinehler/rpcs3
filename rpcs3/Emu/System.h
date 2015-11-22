@@ -127,10 +127,10 @@ enum class video_aspect
 enum class frame_limit_type
 {
 	none,
-	_59_94,
-	_50,
-	_60,
 	_30,
+	_50,
+	_59_94,
+	_60,
 	_auto,
 };
 
@@ -267,7 +267,7 @@ struct cfg_root : cfg::node
 		cfg::_bool lower_spu_priority{this, "Lower SPU thread priority"};
 		cfg::_bool spu_debug{this, "SPU Debug"};
 
-		cfg::_enum<lib_loading_type> lib_loading{this, "Lib Loader", lib_loading_type::automatic};
+		cfg::_enum<lib_loading_type> lib_loading{this, "Lib loader", lib_loading_type::automatic};
 		cfg::_bool hook_functions{this, "Hook static functions"};
 		cfg::set_entry load_libraries{this, "Load libraries"};
 
@@ -293,26 +293,26 @@ struct cfg_root : cfg::node
 	{
 		node_video(cfg::node* _this) : cfg::node(_this, "Video") {}
 
-		cfg::_enum<video_renderer> renderer{this, "Renderer", video_renderer::opengl};
+		cfg::_enum<video_renderer> renderer{this, "Rendering API", video_renderer::opengl};
 
 		cfg::_enum<video_resolution> resolution{this, "Resolution", video_resolution::_720};
 		cfg::_enum<video_aspect> aspect_ratio{this, "Aspect ratio", video_aspect::_16_9};
 		cfg::_enum<frame_limit_type> frame_limit{this, "Frame limit", frame_limit_type::none};
 
-		cfg::_bool write_color_buffers{this, "Write Color Buffers"};
-		cfg::_bool write_depth_buffer{this, "Write Depth Buffer"};
-		cfg::_bool read_color_buffers{this, "Read Color Buffers"};
-		cfg::_bool read_depth_buffer{this, "Read Depth Buffer"};
+		cfg::_bool write_color_buffers{this, "Write color buffers"};
+		cfg::_bool write_depth_buffer{this, "Write depth buffer"};
+		cfg::_bool read_color_buffers{this, "Read color buffers"};
+		cfg::_bool read_depth_buffer{this, "Read depth buffer"};
 		cfg::_bool log_programs{this, "Log shader programs"};
 		cfg::_bool vsync{this, "VSync"};
 		cfg::_bool debug_output{this, "Debug output"};
 		cfg::_bool overlay{this, "Debug overlay"};
-		cfg::_bool gl_legacy_buffers{this, "Use Legacy OpenGL Buffers (Debug)"};
+		cfg::_bool gl_legacy_buffers{this, "Use legacy OpenGL buffers (Debug)"};
 		cfg::_bool use_gpu_texture_scaling{this, "Use GPU texture scaling", true};
 
 		struct node_d3d12 : cfg::node
 		{
-			node_d3d12(cfg::node* _this) : cfg::node(_this, "D3D12") {}
+			node_d3d12(cfg::node* _this) : cfg::node(_this, "DirectX 12") {}
 
 			cfg::string adapter{this, "Adapter"};
 
@@ -335,7 +335,7 @@ struct cfg_root : cfg::node
 		cfg::_enum<audio_renderer> renderer{this, "Renderer", static_cast<audio_renderer>(1)};
 
 		cfg::_bool dump_to_file{this, "Dump to file"};
-		cfg::_bool convert_to_u16{this, "Convert to 16 bit"};
+		cfg::_bool convert_to_u16{this, "Convert to 16-bit"};
 		cfg::_bool downmix_to_2ch{this, "Downmix to Stereo", true};
 
 	} audio{this};
@@ -346,7 +346,7 @@ struct cfg_root : cfg::node
 
 		cfg::_enum<keyboard_handler> keyboard{this, "Keyboard", keyboard_handler::null};
 		cfg::_enum<mouse_handler> mouse{this, "Mouse", mouse_handler::basic};
-		cfg::_enum<pad_handler> pad{this, "Pad", pad_handler::keyboard};
+		cfg::_enum<pad_handler> pad{this, "Controller", pad_handler::keyboard};
 		cfg::_enum<camera_handler> camera{this, "Camera", camera_handler::null};
 		cfg::_enum<fake_camera_type> camera_type{this, "Camera type", fake_camera_type::unknown};
 
