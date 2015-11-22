@@ -18,7 +18,7 @@ inline std::string sstr(const QString& _in) { return _in.toUtf8().toStdString();
 
 cg_disasm_window::cg_disasm_window(QWidget* parent): QTabWidget()
 {
-	setWindowTitle(tr("Cg Disasm"));
+	setWindowTitle(tr("Cg disassembler"));
 	setAttribute(Qt::WA_DeleteOnClose);
 	setMinimumSize(200, 150); // seems fine on win 10
 	resize(QSize(620, 395));

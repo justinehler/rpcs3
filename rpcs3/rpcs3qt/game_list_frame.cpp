@@ -1,4 +1,4 @@
-#include "game_list_frame.h"
+﻿#include "game_list_frame.h"
 
 #include "settings_dialog.h"
 #include "table_item_delegate.h"
@@ -21,7 +21,7 @@
 #include <QTimer>
 #include <QUrl>
 
-static const std::string m_class_name = "GameViewer";
+static const std::string m_class_name = "Game viewer";
 inline std::string sstr(const QString& _in) { return _in.toUtf8().toStdString(); }
 
 // Auxiliary classes
@@ -49,7 +49,7 @@ public:
 };
 
 game_list_frame::game_list_frame(std::shared_ptr<gui_settings> settings, Render_Creator r_Creator, QWidget *parent) 
-	: QDockWidget(tr("Game List"), parent), xgui_settings(settings), m_Render_Creator(r_Creator)
+	: QDockWidget(tr("PS3 software"), parent), xgui_settings(settings), m_Render_Creator(r_Creator)
 {
 	m_Icon_Size = GUI::gl_icon_size.at(m_gui_settings->GetValue(GUI::gl_iconSize).toString());
 
@@ -79,13 +79,13 @@ game_list_frame::game_list_frame(std::shared_ptr<gui_settings> settings, Render_
 	setWidget(gameList);
 
 	// Actions
-	showIconColAct = new QAction(tr("Show Icons"), this);
-	showNameColAct = new QAction(tr("Show Names"), this);
-	showSerialColAct = new QAction(tr("Show Serials"), this);
+	showIconColAct = new QAction(tr("Show icons"), this);
+	showNameColAct = new QAction(tr("Show names"), this);
+	showSerialColAct = new QAction(tr("Show serials"), this);
 	showFWColAct = new QAction(tr("Show FWs"), this);
-	showAppVersionColAct = new QAction(tr("Show App Versions"), this);
-	showCategoryColAct = new QAction(tr("Show Categories"), this);
-	showPathColAct = new QAction(tr("Show Paths"), this);
+	showAppVersionColAct = new QAction(tr("Show app versions"), this);
+	showCategoryColAct = new QAction(tr("Show categories"), this);
+	showPathColAct = new QAction(tr("Show paths"), this);
 
 	columnActs = { showIconColAct, showNameColAct, showSerialColAct, showFWColAct, showAppVersionColAct, showCategoryColAct, showPathColAct };
 
@@ -250,10 +250,12 @@ void game_list_frame::LoadPSF()
 		{
 			game.category = sstr(category::game_Data);
 			game.icon_path = dir + "/ICON0.PNG";
+			continue;
 		}
 		else if (game.category == "unknown")
 		{
 			game.category = sstr(category::unknown);
+			continue;
 		}
 
 		m_game_data.push_back(game);
@@ -389,19 +391,19 @@ void game_list_frame::ShowContextMenu(const QPoint &pos) // this is a slot
 	QAction* configure = myMenu.addAction(tr("&Configure"));
 	myMenu.addSeparator();
 	QAction* removeGame = myMenu.addAction(tr("&Remove"));
-	QAction* removeConfig = myMenu.addAction(tr("&Remove Custom Configuration"));
+	QAction* removeConfig = myMenu.addAction(tr("&Remove custom configuration"));
 	myMenu.addSeparator();
-	QAction* openGameFolder = myMenu.addAction(tr("&Open Install Folder"));
-	QAction* openConfig = myMenu.addAction(tr("&Open Config Folder"));
+	QAction* openGameFolder = myMenu.addAction(tr("&Open install folder"));
+	QAction* openConfig = myMenu.addAction(tr("&Open config folder"));
 	myMenu.addSeparator();
-	QAction* checkCompat = myMenu.addAction(tr("&Check Game Compatibility"));
+	QAction* checkCompat = myMenu.addAction(tr("&Check game compatibility"));
 
 	connect(boot, &QAction::triggered, [=]() {Boot(row); });
 	connect(configure, &QAction::triggered, [=](){
 		settings_dialog(xgui_settings, m_Render_Creator, this, &m_game_data[row]).exec();
 	});
 	connect(removeGame, &QAction::triggered, [=](){
-		if (QMessageBox::question(this, tr("Confirm Delete"), tr("Permanently delete files?")) == QMessageBox::Yes)
+		if (QMessageBox::question(this, tr("Confirm delete"), tr("Permanently delete files?")) == QMessageBox::Yes)
 			fs::remove_all(Emu.GetGameDir() + m_game_data[row].root);
 		Refresh();
 	});
@@ -465,7 +467,7 @@ void game_list_frame::RemoveCustomConfiguration(int row)
 
 	if (fs::is_file(config_path))
 	{
-		if (QMessageBox::question(this, tr("Confirm Delete"), tr("Delete custom game configuration?")) == QMessageBox::Yes)
+		if (QMessageBox::question(this, tr("Confirm delete"), tr("Delete custom game configuration?")) == QMessageBox::Yes)
 		{
 			if (fs::remove_file(config_path))
 			{
