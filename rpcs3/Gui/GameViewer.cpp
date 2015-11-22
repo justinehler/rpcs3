@@ -8,7 +8,7 @@
 
 #include <algorithm>
 
-static const std::string m_class_name = "GameViewer";
+static const std::string m_class_name = "Game viewer";
 
 // Auxiliary classes
 class sortGameData
@@ -59,7 +59,7 @@ GameViewer::~GameViewer()
 
 void GameViewer::InitPopupMenu()
 {
-	wxMenuItem* boot_item = new wxMenuItem(m_popup, 0, "Boot");
+	wxMenuItem* boot_item = new wxMenuItem(m_popup, 0, _T("Boot"));
 #if defined (_WIN32)
 	// wxMenuItem::Set(Get)Font only available for the wxMSW port
 	wxFont font = GetFont();
@@ -69,11 +69,11 @@ void GameViewer::InitPopupMenu()
 	m_popup->Append(boot_item);
 	m_popup->Append(1, "Configure");
 	m_popup->AppendSeparator();
-	m_popup->Append(2, "Remove Game");
-	m_popup->Append(3, "Remove Custom Configuration");
+	m_popup->Append(2, "Remove game");
+	m_popup->Append(3, "Remove custom configuration");
 	m_popup->AppendSeparator();
-	m_popup->Append(4, "Open Game Folder");
-	m_popup->Append(5, "Open Config Folder");
+	m_popup->Append(4, "Open game folder");
+	m_popup->Append(5, "Open config folder");
 	Bind(wxEVT_MENU, &GameViewer::BootGame, this, 0);
 	Bind(wxEVT_MENU, &GameViewer::ConfigureGame, this, 1);
 	Bind(wxEVT_MENU, &GameViewer::RemoveGame, this, 2);
@@ -337,12 +337,12 @@ void ColumnsArr::Init()
 	m_img_list = new wxImageList(80, 44);
 
 	m_columns.clear();
-	m_columns.emplace_back(0, 90, "Icon");
+	m_columns.emplace_back(0, 90, "");
 	m_columns.emplace_back(1, 160, "Name");
 	m_columns.emplace_back(2, 85, "Serial");
-	m_columns.emplace_back(3, 55, "FW");
-	m_columns.emplace_back(4, 55, "App version");
-	m_columns.emplace_back(5, 75, "Category");
+	m_columns.emplace_back(3, 60, "Min. FW");
+	m_columns.emplace_back(4, 80, "Soft. version");
+	m_columns.emplace_back(5, 75, "Soft. type");
 	m_columns.emplace_back(6, 160, "Path");
 	m_col_icon = &m_columns[0];
 	m_col_name = &m_columns[1];
