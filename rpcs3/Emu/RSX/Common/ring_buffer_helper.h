@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 /**
  * Ring buffer memory helper :
@@ -52,7 +52,7 @@ public:
 
 	size_t m_get_pos; // End of free space
 
-	void init(size_t heap_size, size_t guard_size=0x100000)
+	void init(size_t heap_size, size_t guard_size=0x200000)
 	{
 		m_size = heap_size;
 		m_put_pos = 0;
@@ -63,7 +63,7 @@ public:
 	template<int Alignement>
 	size_t alloc(size_t size)
 	{
-		if (!can_alloc<Alignement>(size)) fmt::throw_exception("Working buffer not big enough" HERE);
+		if (!can_alloc<Alignement>(size)) LOG_ERROR(RSX, "Working buffer not big enough" HERE);
 		size_t alloc_size = align(size, Alignement);
 		size_t aligned_put_pos = align(m_put_pos, Alignement);
 		if (aligned_put_pos + alloc_size < m_size)

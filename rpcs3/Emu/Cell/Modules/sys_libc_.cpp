@@ -1,6 +1,7 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "Emu/Cell/PPUModule.h"
 #include "Utilities/cfmt.h"
+#include <string.h>
 
 namespace vm { using namespace ps3; }
 
@@ -177,14 +178,22 @@ vm::ptr<char> _sys_strncpy(vm::ptr<char> dest, vm::cptr<char> source, u32 len)
 	return dest;
 }
 
-s32 _sys_strncasecmp()
+s32 _sys_strncasecmp(vm::cptr<char> str1, vm::cptr<char> str2, s32 n)
 {
-	fmt::throw_exception("Unimplemented" HERE);
-}
+	sysPrxForUser.trace("_sys_strncasecmp(str1=%s, str2=%s, n=%d)", str1, str2, n);
+	
+#ifdef _WIN32
+	return _strnicmp(str1.get_ptr(), str2.get_ptr(), n);
+#else
+	return strncasecmp(str1.get_ptr(), str2.get_ptr(), n);
+#endif
+ }
 
-s32 _sys_strrchr()
+vm::ptr<char> _sys_strrchr(vm::cptr<char> str, s32 character)
 {
-	fmt::throw_exception("Unimplemented" HERE);
+	sysPrxForUser.trace("_sys_strrchr(str=%s, character=%c)", str, (char)character);
+	
+	return vm::ptr<char>::make(vm::get_addr(strrchr(str.get_ptr(), character)));
 }
 
 s32 _sys_tolower()
@@ -280,7 +289,8 @@ s32 _sys_vsprintf()
 
 s32 _sys_qsort()
 {
-	fmt::throw_exception("Unimplemented" HERE);
+	UNIMPLEMENTED_FUNC(sysPrxForUser);
+	return CELL_OK;
 }
 
 void sysPrxForUser_sys_libc_init()
