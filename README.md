@@ -21,11 +21,11 @@ If you want to contribute please take a look at the [Coding Style](https://githu
 ## Dependencies
 
 ### Windows
-* [Visual Studio 2015](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx)
-* [Visual C++ Redistributable Packages for Visual Studio 2015](http://www.microsoft.com/en-us/download/details.aspx?id=48145)
+* [Visual Studio 2017](https://www.visualstudio.com/downloads/)
+* [Visual C++ Redistributable Packages for Visual Studio 2017](https://go.microsoft.com/fwlink/?LinkId=746572)
 * [Cmake 3.1.0+](https://www.cmake.org/download/) (required; add to PATH)
 * [Python 3.3+](https://www.python.org/downloads/) (required; add to PATH)
-* [Qt 5.8+](https://www.qt.io/download-open-source/) (required; add QTDIR `<QtInstallFolder>\5.8\msvc2015_64\` environment variable if you do not want to use the Visual Studio Qt Plugin)
+* [Qt 5.9+](https://www.qt.io/download-open-source/) (required; add QTDIR `<QtInstallFolder>\5.8\msvc2015_64\` environment variable if you do not want to use the Visual Studio Qt Plugin)
 * [Visual Studio Qt Plugin](https://marketplace.visualstudio.com/items?itemName=TheQtCompany.QtVisualStudioTools2015) (optional; see above)
 
 ### Linux
@@ -46,7 +46,7 @@ To initialize the repository don't forget to execute `git submodule update --ini
 ### Configuring Qt
 
 *If you're using Visual Studio 2017 without Qt plugin support (or simply dont want to use it):* 
-1) Add `QTDIR` environment variable and set it to `<QtInstallFolder>\5.8\msvc2015_64\` </br>
+1) Add `QTDIR` environment variable and set it to `<QtInstallFolder>\5.9\msvc2017_64\` </br>
 *OR* </br>
 open the SLN, wait for projects to load, in explorer open `rpcs3qt/rpcs3qt.vcxproj.user` and set `<QTDIR>QtInstallFolder/5.8/msvc2015_64</QTDIR>`
 
