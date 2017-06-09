@@ -43,6 +43,7 @@ struct data_heap
 
 	size_t m_size;
 	size_t m_put_pos; // Start of free space
+	size_t m_guard_size; //If an allocation touches the guard region, reset the heap to avoid going over budget
 public:
 	data_heap() = default;
 	~data_heap() = default;
@@ -51,11 +52,12 @@ public:
 
 	size_t m_get_pos; // End of free space
 
-	void init(size_t heap_size)
+	void init(size_t heap_size, size_t guard_size=0x100000)
 	{
 		m_size = heap_size;
 		m_put_pos = 0;
 		m_get_pos = heap_size - 1;
+		m_guard_size = guard_size;
 	}
 
 	template<int Alignement>
@@ -82,5 +84,11 @@ public:
 	size_t get_current_put_pos_minus_one() const
 	{
 		return (m_put_pos - 1 > 0) ? m_put_pos - 1 : m_size - 1;
+	}
+	
+	template<int Alignment>
+	bool is_critical()
+	{
+		return !can_alloc<Alignment>(m_guard_size);
 	}
 };
